@@ -1,0 +1,392 @@
+﻿<Page
+    x:Class="俄罗斯方块.AutoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:俄罗斯方块"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    KeyDown="xaml_MainGrid_KeyDown">
+    <Page.Resources>
+        <Image x:Key="Fire" Source="Image/Fire.png" />
+    </Page.Resources>
+    <Page.Background>
+        <ImageBrush Stretch="UniformToFill" ImageSource="Image/bg.png"/>
+    </Page.Background>
+    <Page.BottomAppBar >
+        <!--控制栏-->
+        <AppBar x:Name="xaml_appbar" 
+                    IsSticky="False"  
+                    KeyDown="xaml_MainGrid_KeyDown" 
+                    IsOpen="True" IsTabStop="True" 
+                    IsHitTestVisible="True"
+                    IsHoldingEnabled="True" Opened="xaml_appbar_Opened"
+                    >
+            <AppBar.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF5D3F22" Offset="1"/>
+                    <GradientStop Color="#FF9B6E0D" Offset="0.933"/>
+                    <GradientStop Color="#FFC7A252" Offset="0.767"/>
+                    <GradientStop Color="#FFDCC9A0" Offset="0.233"/>
+                    <GradientStop Color="#FFDCC28B" Offset="0.547"/>
+                </LinearGradientBrush>
+            </AppBar.Background>
+            <StackPanel Orientation="Horizontal">
+                <AppBarSeparator />
+                <AppBarButton Name="Btn_Continue" Label="继续" Click="Btn_Continue_Click" Icon="Play" IsEnabled="False" Width="52"/>
+                <AppBarButton Name="Btn_Stop" Label="暂停" Click="Btn_Stop_Click" Icon="Pause" Width="52"/>
+                <AppBarSeparator />
+                <AppBarButton Name="Btn_Refresh" Label="重新开始" Click="Btn_Refresh_Click"  Icon="Refresh" Width="52"/>
+                <AppBarButton Name="Btn_Sound" Label="静音" Click="Btn_Sound_Click" Icon="Mute"  Width="52"/>
+            </StackPanel>
+        </AppBar>
+    </Page.BottomAppBar>
+    <Page.TopAppBar>
+        <!--顶控制栏-->
+        <CommandBar x:Name="xaml_cammandbar" Visibility="Collapsed"
+                    HorizontalAlignment="Center"
+                    IsOpen="true" IsSticky="False" IsTabStop="False" IsHitTestVisible="True" IsTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False">
+            <AppBar.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFDCC28B" Offset="0.87"/>
+                    <GradientStop Color="#FFDCC9A0" Offset="0.43"/>
+                    <GradientStop Color="#FFC7A252" Offset="0.18"/>
+                    <GradientStop Color="#FF9B6E0D" Offset="0.003"/>
+                    <GradientStop Color="#FF5D3F22"/>
+                </LinearGradientBrush>
+            </AppBar.Background>
+            <AppBarButton Name="Btn_Back2" Label="退出" Click="Btn_Back_Click" Icon="Back" />
+            <AppBarSeparator />
+            <AppBarButton Name="Btn_Continue2" Label="继续" Click="Btn_Continue_Click" Icon="Play" IsEnabled="False"  />
+            <AppBarButton Name="Btn_Stop2" Label="暂停" Click="Btn_Stop_Click" Icon="Pause"/>
+            <AppBarSeparator />
+            <AppBarButton Name="Btn_Refresh2" Label="重新开始" Click="Btn_Refresh_Click"  Icon="Refresh"/>
+            <AppBarButton Name="Btn_Sound2" Label="静音" Click="Btn_Sound_Click" Icon="Mute" />
+        </CommandBar>
+    </Page.TopAppBar>
+    <Grid x:Name="MainG"
+          Background="Transparent" 
+          HorizontalAlignment="Center" 
+          VerticalAlignment="Center" IsTapEnabled="False"
+            >
+
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!--自适应页面布局-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <!--Lumia630手机-->
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="xaml_MainGrid.Width" Value="210" />
+                        <Setter Target="xaml_MainGrid.Height" Value="350"/>
+                        <Setter Target="xaml_PreGrid.Width" Value="64" />
+                        <Setter Target="xaml_PreGrid.Height" Value="64"/>
+                        <Setter Target="Sp_1.Orientation" Value="Vertical" />
+                        <Setter Target="Sp_2.Orientation" Value="Vertical" />
+                        <Setter Target="Sp_3.Orientation" Value="Vertical" />
+                    </VisualState.Setters>
+                </VisualState>
+                <!--4英寸手机-->
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="640" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="xaml_MainGrid.Width" Value="257.333" />
+                        <Setter Target="xaml_MainGrid.Height" Value="428.888"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState>
+                    <!--4.5英寸手机-->
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="768" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="xaml_MainGrid.Width" Value="373.333" />
+                        <Setter Target="xaml_MainGrid.Height" Value="628.888"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState>
+                    <!--5英寸手机-->
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="1024" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="xaml_MainGrid.Width" Value="537.333" />
+                        <Setter Target="xaml_MainGrid.Height" Value="895.555"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+
+                <VisualState x:Name="Wide">
+                    <!--PC-->
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1024" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--当页面宽度类似PC时，隐藏控制栏，完全使用键盘(Bug!!!)-->
+                        <!--<Setter Target="xaml_cammandbar.Visibility" Value="Visible" />-->
+                        <!--<Setter Target="xaml_appbar.Visibility" Value="Collapsed"/>-->
+
+                        <Setter Target="Bt_Left.Visibility" Value="Collapsed" />
+                        <Setter Target="Bt_Right.Visibility" Value="Collapsed" />
+                        <Setter Target="Bt_Down.Visibility" Value="Collapsed" />
+                        <Setter Target="Bt_DownEnd.Visibility" Value="Collapsed" />
+                        <Setter Target="Bt_Rotate.Visibility" Value="Collapsed" />
+
+                        <Setter Target="xaml_MainGrid.Width" Value="540" />
+                        <Setter Target="xaml_MainGrid.Height" Value="900"/>
+
+                        <Setter Target="xaml_PreGrid.Width" Value="128" />
+                        <Setter Target="xaml_PreGrid.Height" Value="128 "/>
+                        <Setter Target="xaml_PreGrid.Margin" Value="0 5 50 0"/>
+
+                        <Setter Target="Sp_1.Margin" Value="0 10 0 0" />
+                        <Setter Target="Sp_2.Margin" Value="0 10 0 0" />
+                        <Setter Target="Sp_3.Margin" Value="0 10 0 0" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <!--手机控制栏-->
+        <Grid x:Name="xaml_Control" Grid.Row="2" Grid.ColumnSpan="2" IsTapEnabled="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--左右-->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 28 0 0" 
+                        Grid.Row="1" Grid.Column="0" >
+                <Button x:Name="Bt_Left"
+                        Click="Btn_Left_Click"
+                        Background="Transparent" IsTapEnabled="False"
+                        >
+                    <Ellipse Width="40" Height="40">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="Image/left.png"/>
+                        </Ellipse.Fill>
+
+                    </Ellipse>
+                </Button>
+                <Button x:Name="Bt_Right" 
+                        Margin="16 0 0 0"
+                        Click="Btn_Right_Click"
+                        Background="Transparent" IsTapEnabled="False"
+                        >
+                    <Ellipse Width="40" Height="40">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="Image/right.png"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </Button>
+            </StackPanel>
+            <!--下-->
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Margin="0 0 0 0" HorizontalAlignment="Center">
+
+                <Button x:Name="Bt_Down" 
+                        Click="Btn_Down_Click"
+                        Background="Transparent" IsTapEnabled="False"
+                        >
+                    <Ellipse Width="40" Height="40">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="Image/down.png"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </Button>
+            </StackPanel>
+            <!--旋转-->
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Margin="0 28 0 0" >
+
+                <Button x:Name="Bt_Rotate" 
+                        Click="Btn_Rotate_Click"
+                        Margin="36 0 0 0"
+                        Background="Transparent" IsTapEnabled="False"
+                        >
+                    <Ellipse Width="40" Height="40">
+                        <Ellipse.Fill>
+                            <LinearGradientBrush EndPoint="0.8,1" StartPoint="0.4,0" >
+                                <GradientStop Color="White" Offset="0"/>
+                                <GradientStop Color="#FFC063FF" Offset="0.543"/>
+                                <GradientStop Color="White" Offset="1"/>
+                                <GradientStop Color="#FFE0C6F1" Offset="0.24"/>
+                                <GradientStop Color="#FFC182EE" Offset="0.77"/>
+                                <GradientStop Color="#FFC794EC" Offset="0.927"/>
+                            </LinearGradientBrush>
+                        </Ellipse.Fill>
+
+                    </Ellipse>
+                </Button>
+            </StackPanel>
+            <!--下落到底-->
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Margin="0 0 0 0" HorizontalAlignment="Center" >
+
+                <Button x:Name="Bt_DownEnd" 
+                        Click="Btn_DownEnd_Click"
+                        Margin="0 0 24 0"
+                        Background="Transparent" IsTapEnabled="False"
+                 >
+
+                    <Ellipse Width="40" Height="40">
+                        <Ellipse.Fill>
+                            <LinearGradientBrush EndPoint="0.8,1" StartPoint="0.4,0">
+                                <GradientStop Color="White" Offset="0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                                <GradientStop Color="#FF009BE4" Offset="0.52"/>
+                                <GradientStop Color="#FF77D3FF" Offset="0.22"/>
+                                <GradientStop Color="#FF49C5FF" Offset="0.853"/>
+                            </LinearGradientBrush>
+                        </Ellipse.Fill>
+
+                    </Ellipse>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!--音频-->
+        <StackPanel x:Name="MainSp"  Grid.Row="0" Grid.Column="0" Grid.RowSpan="1"
+            Orientation="Vertical"  VerticalAlignment="Center" Width="auto" IsTapEnabled="False" 
+        >
+            <MediaElement x:Name="xaml_Sound_DownEnd" Source="sound/下落.wav" IsLooping="False" Visibility="Collapsed" AutoPlay="False"/>
+            <MediaElement x:Name="xaml_Sound_Remove" Source="sound/消行.wav" IsLooping="False" Visibility="Collapsed" AutoPlay="False" />
+            <MediaElement x:Name="xaml_Sound_Rotate" Source="sound/旋转.wav" IsLooping="False" Visibility="Collapsed" AutoPlay="False" />
+            <MediaElement x:Name="xaml_Sound_Background" Source="sound/背景.mp3" IsLooping="True" Visibility="Collapsed" AutoPlay="True" />
+            <MediaElement x:Name="xaml_Sound_LevelUp" Source="sound/升级.mp3" IsLooping="False" Visibility="Collapsed" AutoPlay="False" />
+            <MediaElement x:Name="xaml_Sound_Over" Source="sound/Over.wav" IsLooping="False" Visibility="Collapsed" AutoPlay="False"/>
+            <MediaElement x:Name="xaml_Sound_Win" Source="sound/win.wav" IsLooping="False" Visibility="Collapsed" AutoPlay="False"/>
+        </StackPanel>
+
+        <StackPanel x:Name="Sp_Pre" Width="auto"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center"
+                        Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" IsTapEnabled="False" 
+                        >
+            <TextBlock 
+                    Text="预测" 
+                    FontFamily="幼圆"
+                    FontSize="24" 
+                    FontWeight="Bold"
+                    Foreground="#FF110600"
+                    VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                />
+            <!--预测-->
+            <Grid x:Name="xaml_PreGrid"  
+                      Background="Black" 
+                      Width="72" Height="72" 
+                      Opacity="0.9"
+                >
+            </Grid>
+            
+            <StackPanel 
+                    HorizontalAlignment="Center"
+                    Orientation="Vertical" 
+                    VerticalAlignment="Center" 
+                        Margin="0 10 0 0">
+                <!--目标-->
+                <StackPanel   x:Name="Sp_1" 
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                    <TextBlock 
+                            Text="目标："
+                            FontFamily="幼圆"
+                            FontSize="20" 
+                            FontWeight="Bold"
+                            Foreground="#FF110600"
+                            VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                            Margin="0 0 4 4"
+                        />
+                    <TextBlock x:Name="xaml_Target"
+                            Text ="500"
+                            FontFamily="幼圆"
+                            FontSize="20" 
+                            FontWeight="Bold"
+                            Foreground="#FFFF7400"
+                            VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        />
+                </StackPanel>
+                <!--等级-->
+                <StackPanel x:Name="Sp_2" 
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal" 
+                        Margin="0 4 0 0">
+                    <TextBlock 
+                            Text="等级："
+                            FontFamily="幼圆"
+                            FontSize="24" 
+                            FontWeight="Bold"
+                            Foreground="#FF110600"
+                            VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                            Margin="0 0 4 4"
+                        />
+                    <TextBlock x:Name="xaml_Level"
+                            Text ="1"
+                            FontFamily="幼圆"
+                            FontSize="24" 
+                            FontWeight="Bold"
+                            Foreground="White"
+                            VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                            Margin="0 0 0 0"
+                        />
+                </StackPanel>
+            </StackPanel>
+            <!--得分-->
+            <StackPanel  x:Name="Sp_3"
+                    Orientation="Horizontal"
+                            Margin="0 0 4 4">
+
+                <TextBlock 
+                        Text="得分："
+                        FontFamily="幼圆"
+                        FontSize="24" 
+                        FontWeight="Bold"
+                        Foreground="#FF110600"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                            Margin="0 0 4 4"
+                    />
+                <TextBlock x:Name="xaml_Score" 
+                        Text ="0"
+                        FontFamily="幼圆"
+                        FontSize="24" 
+                        FontWeight="Bold"
+                        Foreground="White"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                            Margin="0 0 0 0"
+                    />
+            </StackPanel>
+        </StackPanel>
+        <Grid x:Name="xaml_MainGrid"
+              Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" 
+            Width="360" Height="600"  
+            Background="Black"
+            Opacity="0.8" IsTapEnabled="False"  >
+            <!--Margin="4 64 4 72"-->
+        </Grid>
+    </Grid>
+</Page>
