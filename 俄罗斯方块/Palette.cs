@@ -287,8 +287,30 @@ namespace 俄罗斯方块
             }
             else
             {
-                for (int i = 0; i < 3; ++i) b.Rotate();
-                return false;
+                bool canRotate = false;
+                if (!InGrid(b))
+                {
+                    for (int i = 1; i < 4; ++i)
+                    {
+                        if (CanMove(0, -i))
+                        {
+                            canRotate = true;
+                            break;
+                        }
+                        if (CanMove(0, i))
+                        {
+                            canRotate = true;
+                            break;
+                        }
+                    }
+                }
+                
+                if (!canRotate)
+                {
+                    for (int i = 0; i < 3; ++i) b.Rotate();
+                    return false;
+                }
+                return true;
             }
         }
 
@@ -442,11 +464,33 @@ namespace 俄罗斯方块
             return false;
         }
 
+        protected bool InGrid(Block b)
+        {
+            for (int i = 0; i < b.Length; ++i)
+            {
+                Point p = b[i];
+                int x = (int)p.X + b.XPos, y = (int)p.Y + b.YPos;
+                if (!(0 <= x && x < Row && 0 <= y && y < Column)) return false;
+            }
+            return true;
+        }
+
         protected bool Exist(int _x, int _y) // 判断 点 是否已被占用
         {
             if (staArr[_x, _y]) return true;
             return false;
         } 
+
+        protected bool Exist(Block b)
+        {
+            for (int i = 0; i < b.Length; ++i)
+            {
+                Point p = b[i];
+                int x = (int)p.X + b.XPos , y = (int)p.Y + b.YPos ;
+                if (!staArr[x, y]) return false;
+            }
+            return true;
+        }
         
         private void AddStaArr() // 给 二维状态数组 附加状态
         {

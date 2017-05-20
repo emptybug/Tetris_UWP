@@ -23,17 +23,23 @@
             <SolidColorBrush Color="Black" Opacity="0.6"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.3*"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.3*"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1" Grid.Column="1">
-            <TextBlock  Text="俄罗斯方块" FontSize="80"  FontFamily="幼圆" FontWeight="Bold"  HorizontalAlignment="Center">
+        <Image Source="/Assets/DiTu-1.png"
+               Grid.Row="1"
+               Grid.Column="0" Grid.ColumnSpan="3"/>
+        <RelativePanel Grid.Row="0" Grid.Column="1">
+            <TextBlock  Text="俄罗斯方块" FontSize="48dp"  FontFamily="幼圆" FontWeight="Bold"
+                        RelativePanel.AlignHorizontalCenterWithPanel="True"
+                        RelativePanel.AlignVerticalCenterWithPanel="True"
+                        >
                 <TextBlock.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FFFF0202" Offset="1"/>
@@ -47,9 +53,14 @@
                     </LinearGradientBrush>
                 </TextBlock.Foreground>
             </TextBlock>
-        </StackPanel>
+        </RelativePanel>
 
-        <Button  Grid.Column="1" Grid.Row="2" Click="Select_Leval" Background="SkyBlue" Content="开始游戏" FontFamily="幼圆" Foreground="Gainsboro" FontSize="32" FontWeight="Bold" HorizontalAlignment="Stretch" Width="Auto" Height="auto">
+        <Button  Grid.Column="1" 
+                 Grid.Row="2"
+                 Click="Select_Leval" Background="#FF5D3F22" Content="开始游戏" FontFamily="幼圆" 
+                 Foreground="Gainsboro" FontSize="32dp" FontWeight="Bold" 
+                 HorizontalAlignment="Stretch" Width="Auto" Height="auto"
+                 >
         </Button>
     </Grid>
 </Page>
