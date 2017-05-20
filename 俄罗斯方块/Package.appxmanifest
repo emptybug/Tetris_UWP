@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="9ff51f78-30f8-4b05-8394-42d25ba1fa40" Publisher="CN=Rabbee" Version="1.0.6.0" />
+  <Identity Name="9ff51f78-30f8-4b05-8394-42d25ba1fa40" Publisher="CN=rabbee" Version="1.0.9.0" />
   <mp:PhoneIdentity PhoneProductId="9ff51f78-30f8-4b05-8394-42d25ba1fa40" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>俄罗斯方块</DisplayName>
