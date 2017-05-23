@@ -37,7 +37,8 @@
                 <AppBarButton Name="Btn_Stop" Label="暂停" Click="Btn_Stop_Click" Icon="Pause" Width="52"/>
                 <AppBarSeparator />
                 <AppBarButton Name="Btn_Refresh" Label="重新开始" Click="Btn_Refresh_Click"  Icon="Refresh" Width="52"/>
-                <AppBarButton Name="Btn_Sound" Label="静音" Click="Btn_Sound_Click" Icon="Mute"  Width="52"/>
+                <AppBarSeparator />
+                <AppBarButton Name="Btn_Sound" Label="音乐" Click="Btn_Sound_Click" Icon="Volume"  Width="52"/>
             </StackPanel>
         </AppBar>
     </Page.BottomAppBar>

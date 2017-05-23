@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="9ff51f78-30f8-4b05-8394-42d25ba1fa40" Publisher="CN=rabbee" Version="1.0.9.0" />
-  <mp:PhoneIdentity PhoneProductId="9ff51f78-30f8-4b05-8394-42d25ba1fa40" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="10452Rabbee.48676A320C78" Publisher="CN=ED57D7CE-A1A4-4ADA-B40B-109F4CADD35D" Version="1.1.1.0" />
+  <mp:PhoneIdentity PhoneProductId="aa9c1125-151e-4199-8504-e6f431c29c97" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>俄罗斯方块</DisplayName>
+    <DisplayName>俄罗斯方块（经典）</DisplayName>
     <PublisherDisplayName>Rabbee</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -15,10 +15,15 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="俄罗斯方块.App">
-      <uap:VisualElements DisplayName="俄罗斯方块" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="俄罗斯方块" BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
+      <uap:VisualElements DisplayName="俄罗斯方块（经典）" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="俄罗斯方块" BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png" ShortName="俄罗斯方块">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="wide310x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
         </uap:DefaultTile>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#FBF7A6" />
+        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#FDf6a6" />
         <uap:InitialRotationPreference>
           <uap:Rotation Preference="portrait" />
           <uap:Rotation Preference="portraitFlipped" />

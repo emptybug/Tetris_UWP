@@ -112,21 +112,21 @@ namespace 俄罗斯方块
         }
         private void Btn_Sound_Click(object sender, RoutedEventArgs e) // 静音
         {
-            if(Btn_Sound2.Label == "静音" )
+            if(Btn_Sound.Label == "音乐")
             {
                 xaml_Sound_Background.Pause();
-                Btn_Sound2.Label = "音乐";
-                Btn_Sound2.Icon = new SymbolIcon(Symbol.Volume);
-                Btn_Sound.Label = "音乐";
-                Btn_Sound.Icon = new SymbolIcon(Symbol.Volume);
-            }
-            else
-            {
-                xaml_Sound_Background.Play();
                 Btn_Sound2.Label = "静音";
                 Btn_Sound2.Icon = new SymbolIcon(Symbol.Mute);
                 Btn_Sound.Label = "静音";
                 Btn_Sound.Icon = new SymbolIcon(Symbol.Mute);
+            }
+            else
+            {
+                xaml_Sound_Background.Play();
+                Btn_Sound2.Label = "音乐";
+                Btn_Sound2.Icon = new SymbolIcon(Symbol.Volume);
+                Btn_Sound.Label = "音乐";
+                Btn_Sound.Icon = new SymbolIcon(Symbol.Volume);
             }
         }
         
