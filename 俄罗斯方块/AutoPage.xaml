@@ -33,12 +33,16 @@
             </AppBar.Background>
             <StackPanel Orientation="Horizontal">
                 <AppBarSeparator />
-                <AppBarButton Name="Btn_Continue" Label="继续" Click="Btn_Continue_Click" Icon="Play" IsEnabled="False" Width="52"/>
-                <AppBarButton Name="Btn_Stop" Label="暂停" Click="Btn_Stop_Click" Icon="Pause" Width="52"/>
+                <AppBarButton Name="Btn_Continue"  Click="Btn_Continue_Click" Icon="Play" IsEnabled="False" Width="52"
+                              x:Uid="Button_Start" Label=""/>
+                <AppBarButton Name="Btn_Stop" Click="Btn_Stop_Click" Icon="Pause" Width="52"
+                              x:Uid="Button_Pause" Label=""/>
                 <AppBarSeparator />
-                <AppBarButton Name="Btn_Refresh" Label="重新开始" Click="Btn_Refresh_Click"  Icon="Refresh" Width="52"/>
+                <AppBarButton Name="Btn_Refresh" Click="Btn_Refresh_Click"  Icon="Refresh" Width="52"
+                              x:Uid="Button_Restart" Label="" />
                 <AppBarSeparator />
-                <AppBarButton Name="Btn_Sound" Label="音乐" Click="Btn_Sound_Click" Icon="Volume"  Width="52"/>
+                <AppBarButton Name="Btn_Sound" Click="Btn_Sound_Click" Icon="Volume"  Width="52"
+                              x:Uid="Button_Sound" Label="" />
             </StackPanel>
         </AppBar>
     </Page.BottomAppBar>
@@ -283,8 +287,9 @@
                         Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" IsTapEnabled="False" 
                         >
             <TextBlock 
-                    Text="预测" 
-                    FontFamily="幼圆"
+                    x:Uid="Prediction"
+                    Text="" 
+                    FontFamily="微软雅黑"
                     FontSize="24" 
                     FontWeight="Bold"
                     Foreground="#FF110600"
@@ -309,8 +314,9 @@
                         HorizontalAlignment="Center"
                         Orientation="Horizontal">
                     <TextBlock 
-                            Text="目标："
-                            FontFamily="幼圆"
+                            x:Uid="Target"
+                            Text=""
+                            FontFamily="微软雅黑"
                             FontSize="20" 
                             FontWeight="Bold"
                             Foreground="#FF110600"
@@ -320,7 +326,7 @@
                         />
                     <TextBlock x:Name="xaml_Target"
                             Text ="500"
-                            FontFamily="幼圆"
+                            FontFamily="微软雅黑"
                             FontSize="20" 
                             FontWeight="Bold"
                             Foreground="#FFFF7400"
@@ -334,9 +340,10 @@
                         Orientation="Horizontal" 
                         Margin="0 4 0 0">
                     <TextBlock 
-                            Text="等级："
-                            FontFamily="幼圆"
-                            FontSize="24" 
+                            x:Uid="Level"
+                            Text=""
+                            FontFamily="微软雅黑"
+                            FontSize="20" 
                             FontWeight="Bold"
                             Foreground="#FF110600"
                             VerticalAlignment="Center"
@@ -345,8 +352,8 @@
                         />
                     <TextBlock x:Name="xaml_Level"
                             Text ="1"
-                            FontFamily="幼圆"
-                            FontSize="24" 
+                            FontFamily="微软雅黑"
+                            FontSize="20" 
                             FontWeight="Bold"
                             Foreground="White"
                             VerticalAlignment="Center"
@@ -358,12 +365,14 @@
             <!--得分-->
             <StackPanel  x:Name="Sp_3"
                     Orientation="Horizontal"
+                         HorizontalAlignment="Center"
                             Margin="0 0 4 4">
 
                 <TextBlock 
-                        Text="得分："
-                        FontFamily="幼圆"
-                        FontSize="24" 
+                        x:Uid="Score"
+                        Text=""
+                        FontFamily="微软雅黑"
+                        FontSize="20" 
                         FontWeight="Bold"
                         Foreground="#FF110600"
                         HorizontalAlignment="Center"
@@ -372,8 +381,8 @@
                     />
                 <TextBlock x:Name="xaml_Score" 
                         Text ="0"
-                        FontFamily="幼圆"
-                        FontSize="24" 
+                        FontFamily="微软雅黑"
+                        FontSize="20" 
                         FontWeight="Bold"
                         Foreground="White"
                         VerticalAlignment="Center"

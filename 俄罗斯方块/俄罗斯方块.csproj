@@ -184,6 +184,8 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <PRIResource Include="strings\zh-CN\Resources.resw" />
+    <PRIResource Include="strings\en-US\Resources.resw" />
     <None Include="俄罗斯方块_StoreKey.pfx" />
     <None Include="俄罗斯方块_TemporaryKey.pfx" />
   </ItemGroup>
