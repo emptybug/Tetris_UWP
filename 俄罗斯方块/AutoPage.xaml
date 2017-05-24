@@ -33,42 +33,17 @@
             </AppBar.Background>
             <StackPanel Orientation="Horizontal">
                 <AppBarSeparator />
-                <AppBarButton Name="Btn_Continue"  Click="Btn_Continue_Click" Icon="Play" IsEnabled="False" Width="52"
-                              x:Uid="Button_Start" Label=""/>
-                <AppBarButton Name="Btn_Stop" Click="Btn_Stop_Click" Icon="Pause" Width="52"
-                              x:Uid="Button_Pause" Label=""/>
+                <AppBarButton x:Name="Btn_Control" Click="Btn_Control_Click"  Icon="Pause" Width="52"
+                              />
                 <AppBarSeparator />
-                <AppBarButton Name="Btn_Refresh" Click="Btn_Refresh_Click"  Icon="Refresh" Width="52"
-                              x:Uid="Button_Restart" Label="" />
+                <AppBarButton x:Name="Btn_Refresh" Click="Btn_Refresh_Click"  Icon="Refresh" Width="52"
+                              x:Uid="Button_Restart"  />
                 <AppBarSeparator />
-                <AppBarButton Name="Btn_Sound" Click="Btn_Sound_Click" Icon="Volume"  Width="52"
-                              x:Uid="Button_Sound" Label="" />
+                <AppBarButton x:Name="Btn_Sound" Click="Btn_Sound_Click" Icon="Volume"  Width="52"
+                               />
             </StackPanel>
         </AppBar>
     </Page.BottomAppBar>
-    <Page.TopAppBar>
-        <!--顶控制栏-->
-        <CommandBar x:Name="xaml_cammandbar" Visibility="Collapsed"
-                    HorizontalAlignment="Center"
-                    IsOpen="true" IsSticky="False" IsTabStop="False" IsHitTestVisible="True" IsTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False">
-            <AppBar.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFDCC28B" Offset="0.87"/>
-                    <GradientStop Color="#FFDCC9A0" Offset="0.43"/>
-                    <GradientStop Color="#FFC7A252" Offset="0.18"/>
-                    <GradientStop Color="#FF9B6E0D" Offset="0.003"/>
-                    <GradientStop Color="#FF5D3F22"/>
-                </LinearGradientBrush>
-            </AppBar.Background>
-            <AppBarButton Name="Btn_Back2" Label="退出" Click="Btn_Back_Click" Icon="Back" />
-            <AppBarSeparator />
-            <AppBarButton Name="Btn_Continue2" Label="继续" Click="Btn_Continue_Click" Icon="Play" IsEnabled="False"  />
-            <AppBarButton Name="Btn_Stop2" Label="暂停" Click="Btn_Stop_Click" Icon="Pause"/>
-            <AppBarSeparator />
-            <AppBarButton Name="Btn_Refresh2" Label="重新开始" Click="Btn_Refresh_Click"  Icon="Refresh"/>
-            <AppBarButton Name="Btn_Sound2" Label="静音" Click="Btn_Sound_Click" Icon="Mute" />
-        </CommandBar>
-    </Page.TopAppBar>
     <Grid x:Name="MainG"
           Background="Transparent" 
           HorizontalAlignment="Center" 
@@ -77,11 +52,11 @@
 
         <Grid.RowDefinitions>
             <RowDefinition  Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="36"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
@@ -111,6 +86,8 @@
                     <VisualState.Setters>
                         <Setter Target="xaml_MainGrid.Width" Value="257.333" />
                         <Setter Target="xaml_MainGrid.Height" Value="428.888"/>
+                        <Setter Target="xaml_PreGrid.Width" Value="64" />
+                        <Setter Target="xaml_PreGrid.Height" Value="64"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -122,6 +99,8 @@
                     <VisualState.Setters>
                         <Setter Target="xaml_MainGrid.Width" Value="373.333" />
                         <Setter Target="xaml_MainGrid.Height" Value="628.888"/>
+                        <Setter Target="xaml_PreGrid.Width" Value="64" />
+                        <Setter Target="xaml_PreGrid.Height" Value="64"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -133,6 +112,8 @@
                     <VisualState.Setters>
                         <Setter Target="xaml_MainGrid.Width" Value="537.333" />
                         <Setter Target="xaml_MainGrid.Height" Value="895.555"/>
+                        <Setter Target="xaml_PreGrid.Width" Value="64" />
+                        <Setter Target="xaml_PreGrid.Height" Value="64"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -158,18 +139,18 @@
 
                         <Setter Target="xaml_PreGrid.Width" Value="128" />
                         <Setter Target="xaml_PreGrid.Height" Value="128 "/>
-                        <Setter Target="xaml_PreGrid.Margin" Value="0 5 50 0"/>
+                        <Setter Target="Sp_Pre.Margin" Value="0 0 48 0"/>
 
-                        <Setter Target="Sp_1.Margin" Value="0 10 0 0" />
-                        <Setter Target="Sp_2.Margin" Value="0 10 0 0" />
-                        <Setter Target="Sp_3.Margin" Value="0 10 0 0" />
+                        <Setter Target="Sp_1.Margin" Value="0 8 0 0" />
+                        <Setter Target="Sp_2.Margin" Value="0 8 0 0" />
+                        <Setter Target="Sp_3.Margin" Value="0 8 0 0" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
         <!--手机控制栏-->
-        <Grid x:Name="xaml_Control" Grid.Row="2" Grid.ColumnSpan="2" IsTapEnabled="False">
+        <Grid x:Name="xaml_Control" Grid.Row="1" Grid.ColumnSpan="2" IsTapEnabled="False">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -269,7 +250,7 @@
         </Grid>
 
         <!--音频-->
-        <StackPanel x:Name="MainSp"  Grid.Row="0" Grid.Column="0" Grid.RowSpan="1"
+        <StackPanel x:Name="MainSp"  Grid.Row="0" Grid.Column="0"
             Orientation="Vertical"  VerticalAlignment="Center" Width="auto" IsTapEnabled="False" 
         >
             <MediaElement x:Name="xaml_Sound_DownEnd" Source="sound/下落.wav" IsLooping="False" Visibility="Collapsed" AutoPlay="False"/>
@@ -281,50 +262,48 @@
             <MediaElement x:Name="xaml_Sound_Win" Source="sound/win.wav" IsLooping="False" Visibility="Collapsed" AutoPlay="False"/>
         </StackPanel>
 
-        <StackPanel x:Name="Sp_Pre" Width="auto"
-                        VerticalAlignment="Center" 
-                        HorizontalAlignment="Center"
-                        Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" IsTapEnabled="False" 
+        <RelativePanel x:Name="Sp_Pre" Grid.Row="0" Grid.Column="0"
+                        IsTapEnabled="False" 
+                       Margin="0 0 12 0"
                         >
-            <TextBlock 
-                    x:Uid="Prediction"
-                    Text="" 
-                    FontFamily="微软雅黑"
-                    FontSize="24" 
-                    FontWeight="Bold"
-                    Foreground="#FF110600"
-                    VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                />
             <!--预测-->
             <Grid x:Name="xaml_PreGrid"  
-                      Background="Black" 
-                      Width="72" Height="72" 
-                      Opacity="0.9"
-                >
+                  RelativePanel.AlignVerticalCenterWithPanel="True"
+                  RelativePanel.AlignHorizontalCenterWithPanel="True"
+                  Margin="12 0 12 12"
+                  Grid.Row="1"
+                  Background="Black"
+                    >
             </Grid>
-            
-            <StackPanel 
-                    HorizontalAlignment="Center"
-                    Orientation="Vertical" 
-                    VerticalAlignment="Center" 
-                        Margin="0 10 0 0">
-                <!--目标-->
-                <StackPanel   x:Name="Sp_1" 
+
+            <!--预测Text-->
+            <TextBlock x:Name="Pre_TextBlock"
+                       RelativePanel.Above="xaml_PreGrid"
+                  RelativePanel.AlignHorizontalCenterWithPanel="True"
+                        x:Uid="Prediction"
+                        FontFamily="微软雅黑"
+                        FontSize="16" 
+                        FontWeight="Bold"
+                        Foreground="#FF110600"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                />
+            <!--目标-->
+            <StackPanel   x:Name="Sp_1" 
+                          RelativePanel.Below="xaml_PreGrid"
+                         RelativePanel.AlignHorizontalCenterWithPanel="True"
                         HorizontalAlignment="Center"
                         Orientation="Horizontal">
-                    <TextBlock 
+                <TextBlock 
                             x:Uid="Target"
-                            Text=""
                             FontFamily="微软雅黑"
                             FontSize="20" 
                             FontWeight="Bold"
                             Foreground="#FF110600"
                             VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                            Margin="0 0 4 4"
                         />
-                    <TextBlock x:Name="xaml_Target"
+                <TextBlock x:Name="xaml_Target"
                             Text ="500"
                             FontFamily="微软雅黑"
                             FontSize="20" 
@@ -333,24 +312,24 @@
                             VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         />
-                </StackPanel>
-                <!--等级-->
-                <StackPanel x:Name="Sp_2" 
+            </StackPanel>
+            <!--等级-->
+            <StackPanel x:Name="Sp_2" 
+                        RelativePanel.Below="Sp_1"
+                         RelativePanel.AlignHorizontalCenterWithPanel="True"
                         HorizontalAlignment="Center"
                         Orientation="Horizontal" 
-                        Margin="0 4 0 0">
-                    <TextBlock 
+                        >
+                <TextBlock 
                             x:Uid="Level"
-                            Text=""
                             FontFamily="微软雅黑"
                             FontSize="20" 
                             FontWeight="Bold"
                             Foreground="#FF110600"
                             VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                            Margin="0 0 4 4"
                         />
-                    <TextBlock x:Name="xaml_Level"
+                <TextBlock x:Name="xaml_Level"
                             Text ="1"
                             FontFamily="微软雅黑"
                             FontSize="20" 
@@ -358,26 +337,24 @@
                             Foreground="White"
                             VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                            Margin="0 0 0 0"
                         />
-                </StackPanel>
             </StackPanel>
             <!--得分-->
             <StackPanel  x:Name="Sp_3"
+                         RelativePanel.Below="Sp_2"
+                         RelativePanel.AlignHorizontalCenterWithPanel="True"
                     Orientation="Horizontal"
                          HorizontalAlignment="Center"
-                            Margin="0 0 4 4">
+                         >
 
                 <TextBlock 
                         x:Uid="Score"
-                        Text=""
                         FontFamily="微软雅黑"
                         FontSize="20" 
                         FontWeight="Bold"
                         Foreground="#FF110600"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                            Margin="0 0 4 4"
                     />
                 <TextBlock x:Name="xaml_Score" 
                         Text ="0"
@@ -387,12 +364,12 @@
                         Foreground="White"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                            Margin="0 0 0 0"
                     />
             </StackPanel>
-        </StackPanel>
+        </RelativePanel>
+        
         <Grid x:Name="xaml_MainGrid"
-              Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" 
+              Grid.Row="0" Grid.Column="1" 
             Width="360" Height="600"  
             Background="Black"
             Opacity="0.8" IsTapEnabled="False"  >

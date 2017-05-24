@@ -36,7 +36,9 @@
                Grid.Row="1"
                Grid.Column="0" Grid.ColumnSpan="3"/>
         <RelativePanel Grid.Row="0" Grid.Column="1">
-            <TextBlock  Text="俄罗斯方块" FontSize="48dp"  FontFamily="幼圆" FontWeight="Bold"
+            <TextBlock   
+                        x:Uid="Title"
+                        FontSize="48dp"  FontFamily="幼圆" FontWeight="Bold"
                         RelativePanel.AlignHorizontalCenterWithPanel="True"
                         RelativePanel.AlignVerticalCenterWithPanel="True"
                         >

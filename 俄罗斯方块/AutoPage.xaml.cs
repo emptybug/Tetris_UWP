@@ -76,60 +76,61 @@ namespace 俄罗斯方块
             Display.Remove();
         }
         #endregion
-        private void Btn_Stop_Click(object sender, RoutedEventArgs e) // 暂停
-        {
-            Btn_Continue.IsEnabled = true;
-            Btn_Stop.IsEnabled = false;
 
-            Btn_Continue2.IsEnabled = true;
-            Btn_Stop2.IsEnabled = false;
-            Game_Stop();
-        }
-        private void Btn_Continue_Click(object sender, RoutedEventArgs e) // 继续
+        private void Btn_Control_Click(object sender, RoutedEventArgs e) // 控制暂停继续
         {
-            Btn_Continue.IsEnabled = false;
-            Btn_Stop.IsEnabled = true;
-            Btn_Continue2.IsEnabled = false;
-            Btn_Stop2.IsEnabled = true;
-            Game_Start();
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            if (Btn_Control.Label.Equals(loader.GetString("Button_Pause")))
+            {
+                Btn_Control.Label = loader.GetString("Button_Start");
+                Btn_Control.Icon = new SymbolIcon(Symbol.Play);
+                Game_Stop();
+            }
+            else
+            {
+                Btn_Control.Label = loader.GetString("Button_Pause");
+                Btn_Control.Icon = new SymbolIcon(Symbol.Pause);
+                Game_Start();
+            }
         }
+
         private void Btn_Back_Click(object sender, RoutedEventArgs e) // 退出
         {
             this.Frame.Navigate(typeof(MainPage));
         }
+
         private void Btn_Refresh_Click(object sender, RoutedEventArgs e) // 重新开始
         {
             Game_Stop();
             Layout();
             timer.Interval = TimeInitLevel;
             Game_Start();
-            Btn_Continue.IsEnabled = false;
-            Btn_Stop.IsEnabled = true;
-            Btn_Continue2.IsEnabled = false;
-            Btn_Stop2.IsEnabled = true;
+            Btn_Control.IsEnabled = true;
+
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            Btn_Control.Label = loader.GetString("Button_Pause");
+            Btn_Control.Icon = new SymbolIcon(Symbol.Pause);
+
             xaml_Sound_Background.Position = new TimeSpan(0);
             xaml_Sound_Background.Play();
         }
         private void Btn_Sound_Click(object sender, RoutedEventArgs e) // 静音
         {
-            if(Btn_Sound.Label == "音乐")
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            var temp_str = loader.GetString("Button_Music");
+            if (Btn_Sound.Label.Equals(temp_str))
             {
-                var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
                 xaml_Sound_Background.Pause();
-                //Btn_Sound2.Label = "静音";
-                //Btn_Sound2.Icon = new SymbolIcon(Symbol.Mute);
                 Btn_Sound.Label = loader.GetString("Button_Mute");
                 Btn_Sound.Icon = new SymbolIcon(Symbol.Mute);
             }
             else
             {
-                var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
                 xaml_Sound_Background.Play();
-                //Btn_Sound2.Label = "音乐";
-                //Btn_Sound2.Icon = new SymbolIcon(Symbol.Volume);
-                Btn_Sound.Label = loader.GetString("Button_Sound");
+                Btn_Sound.Label = loader.GetString("Button_Music");
                 Btn_Sound.Icon = new SymbolIcon(Symbol.Volume);
             }
+            
         }
         
 
@@ -151,6 +152,10 @@ namespace 俄罗斯方块
             timer.Start();
 
             Display.IsPause = false;
+
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            Btn_Sound.Label = loader.GetString("Button_Music");
+            Btn_Control.Label = loader.GetString("Button_Pause");
         }
 
         private void Timer_Tick(object sender, object e)
@@ -236,8 +241,7 @@ namespace 俄罗斯方块
         private async void Game_Win()
         {
             timer.Stop();
-            Btn_Continue.IsEnabled = false;
-            Btn_Stop.IsEnabled = false;
+            Btn_Control.IsEnabled = false;
             Display.IsPause = true;
             xaml_Sound_Background.Stop();
             xaml_Sound_Win.Play();
@@ -247,8 +251,7 @@ namespace 俄罗斯方块
         private async void Game_Over()
         {
             timer.Stop();
-            Btn_Continue.IsEnabled = false;
-            Btn_Stop.IsEnabled = false;
+            Btn_Control.IsEnabled = false;
             Display.IsPause = true;
             xaml_Sound_Background.Stop();
             xaml_Sound_Over.Play();
@@ -333,5 +336,6 @@ namespace 俄罗斯方块
         {
 
         }
+
     }
 }

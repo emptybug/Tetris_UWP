@@ -117,19 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Button_Mute.Label" xml:space="preserve">
+  <data name="Button_Mute" xml:space="preserve">
     <value>静音</value>
   </data>
-  <data name="Button_Pause.Label" xml:space="preserve">
+  <data name="Button_Pause" xml:space="preserve">
     <value>暂停</value>
   </data>
   <data name="Button_Restart.Label" xml:space="preserve">
     <value>重新开始</value>
   </data>
-  <data name="Button_Sound.Label" xml:space="preserve">
-    <value>声音</value>
+  <data name="Button_Music" xml:space="preserve">
+    <value>音乐</value>
   </data>
-  <data name="Button_Start.Label" xml:space="preserve">
+  <data name="Button_Start" xml:space="preserve">
     <value>开始</value>
   </data>
   <data name="Level.Text" xml:space="preserve">
@@ -139,12 +139,15 @@
     <value>开始游戏</value>
   </data>
   <data name="Prediction.Text" xml:space="preserve">
-    <value>预测：</value>
+    <value>预测</value>
   </data>
   <data name="Score.Text" xml:space="preserve">
     <value>得分：</value>
   </data>
   <data name="Target.Text" xml:space="preserve">
     <value>目标：</value>
+  </data>
+  <data name="TItle.Text" xml:space="preserve">
+    <value>俄罗斯方块</value>
   </data>
 </root>
