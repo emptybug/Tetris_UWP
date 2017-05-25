@@ -16,12 +16,12 @@
 
     </Page.Resources>
     <Page.Background>
-        <ImageBrush ImageSource="Image/bg.png" Stretch="UniformToFill"/>
+        <ImageBrush ImageSource="Image/bg-black.png" Stretch="UniformToFill"/>
     </Page.Background>
     <Grid>
-        <Grid.Background>
+        <!--<Grid.Background>
             <SolidColorBrush Color="Black" Opacity="0.6"/>
-        </Grid.Background>
+        </Grid.Background>-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="8*"/>
@@ -35,7 +35,9 @@
         <Image Source="/Assets/DiTu-1.png"
                Grid.Row="1"
                Grid.Column="0" Grid.ColumnSpan="3"/>
-        <RelativePanel Grid.Row="0" Grid.Column="1">
+        <RelativePanel Grid.Row="0" Grid.Column="1"
+                       Margin="0 24 0 0"
+                       >
             <TextBlock   
                         x:Uid="Title"
                         FontSize="48dp"  FontFamily="幼圆" FontWeight="Bold"
@@ -57,9 +59,10 @@
             </TextBlock>
         </RelativePanel>
 
-        <Button  Grid.Column="1" 
-                 Grid.Row="2"
-                 Click="Select_Leval" Background="#FF5D3F22" Content="开始游戏" FontFamily="幼圆" 
+        <Button  Grid.Column="1" Grid.Row="2"
+                 Margin="0 0 0 24"
+                 x:Uid="MainButton"
+                 Click="Select_Leval" Background="#FF5D3F22"  FontFamily="幼圆" 
                  Foreground="Gainsboro" FontSize="32dp" FontWeight="Bold" 
                  HorizontalAlignment="Stretch" Width="Auto" Height="auto"
                  >

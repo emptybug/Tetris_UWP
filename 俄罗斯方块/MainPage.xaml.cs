@@ -5,6 +5,9 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,6 +28,12 @@ namespace 俄罗斯方块
         public MainPage()
         {
             this.InitializeComponent();
+
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))    //状态栏颜色
+            {
+                StatusBar.GetForCurrentView().BackgroundColor = Colors.Transparent;
+                StatusBar.GetForCurrentView().ForegroundColor = Colors.White;
+            }
         }
 
         private void Select_Leval(object sender, RoutedEventArgs e)

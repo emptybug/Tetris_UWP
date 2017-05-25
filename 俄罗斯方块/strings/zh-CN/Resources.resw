@@ -135,7 +135,7 @@
   <data name="Level.Text" xml:space="preserve">
     <value>等级：</value>
   </data>
-  <data name="MainButton.Text" xml:space="preserve">
+  <data name="MainButton.Content" xml:space="preserve">
     <value>开始游戏</value>
   </data>
   <data name="Prediction.Text" xml:space="preserve">

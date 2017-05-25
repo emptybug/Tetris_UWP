@@ -5,7 +5,9 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -91,7 +93,9 @@ namespace 俄罗斯方块
                 Btn_Control.Label = loader.GetString("Button_Pause");
                 Btn_Control.Icon = new SymbolIcon(Symbol.Pause);
                 Game_Start();
+                xaml_appbar.IsOpen = false;
             }
+
         }
 
         private void Btn_Back_Click(object sender, RoutedEventArgs e) // 退出
@@ -113,6 +117,7 @@ namespace 俄罗斯方块
 
             xaml_Sound_Background.Position = new TimeSpan(0);
             xaml_Sound_Background.Play();
+            xaml_appbar.IsOpen = false;
         }
         private void Btn_Sound_Click(object sender, RoutedEventArgs e) // 静音
         {
@@ -132,7 +137,33 @@ namespace 俄罗斯方块
             }
             
         }
-        
+
+        /// <summary>
+        /// 开启左上角返回键
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            string myPages = "";
+            foreach (PageStackEntry page in rootFrame.BackStack)
+            {
+                myPages += page.SourcePageType.ToString() + "\n";
+            }
+            //stackCount.Text = myPages;
+
+            if (rootFrame.CanGoBack)
+            {
+                // Show UI in title bar if opted-in and in-app backstack is not empty.
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            }
+            else
+            {
+                // Remove the UI from the title bar if in-app back stack is empty.
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            }
+        }
 
         /// <summary>
         /// 控件初始化
@@ -156,6 +187,46 @@ namespace 俄罗斯方块
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
             Btn_Sound.Label = loader.GetString("Button_Music");
             Btn_Control.Label = loader.GetString("Button_Pause");
+
+            SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
+            //    (sender, e) =>
+            //{
+            //    Game_Stop();
+            //    this.Frame.Navigate(typeof(MainPage));
+            //};
+
+            if (Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
+            {
+                xaml_Control.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                xaml_Control.Visibility = Visibility.Collapsed;
+            }
+
+            //UpdateMainGrid(Data_RP.ActualHeight);
+        }
+
+        /// <summary>
+        /// 设置返回键内容
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void App_BackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame == null) return;
+
+            // Navigate back if possible, and if the event has not 
+            // already been handled .
+            if (rootFrame.CanGoBack
+                && e.Handled == false
+                )
+   {
+                e.Handled = true;
+                Game_Stop();
+                rootFrame.GoBack();
+            }
         }
 
         private void Timer_Tick(object sender, object e)
@@ -308,7 +379,7 @@ namespace 俄罗斯方块
 
         }
 
-        private void xaml_MainGrid_KeyDown(object sender, KeyRoutedEventArgs e) // 键盘事件 处理
+        private void Control_KeyDown(object sender, KeyRoutedEventArgs e) // 键盘事件 处理
         {
             switch ((int)e.Key)
             {
@@ -337,5 +408,84 @@ namespace 俄罗斯方块
 
         }
 
+        private void Page_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
+        }
+
+        private void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs args)
+        {
+            switch (args.VirtualKey)
+            {
+                //case VirtualKey.Down:
+                //    Display.MoveDownEnd();
+                //    break;
+                case VirtualKey.Left:  // 左
+                    Display.MoveLeft();
+                    break;
+                case VirtualKey.Up:  // 上
+                    Display.Rotate();
+                    break;
+                case VirtualKey.Right: // 右
+                    Display.MoveRight();
+                    break;
+                case VirtualKey.Down: // 下
+                    Display.MoveDownEnd();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void xaml_MainGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            UpdateMainGrid(e.NewSize.Height);
+        }
+
+        private void UpdateMainGrid(double height)
+        {
+            xaml_MainGrid.Height = height;
+            xaml_MainGrid.Width = height * 3 / 5;
+            xaml_PreGrid.Width = xaml_PreGrid.Height = height / 6;
+            
+            //实时调整显示面板的长宽
+            if (xaml_MainGrid.Width >= Data_RP.ActualWidth / 2)
+            {
+                xaml_MainGrid.SetValue(RelativePanel.AlignRightWithPanelProperty, true);
+                xaml_MainGrid.SetValue(RelativePanel.AlignHorizontalCenterWithPanelProperty, false);
+                xaml_MainGrid.Margin = new Thickness(0, 12, 12, 0);
+
+                Sp_Pre.SetValue(RelativePanel.AlignLeftWithPanelProperty, true);
+                Sp_Pre.SetValue(RelativePanel.AlignHorizontalCenterWithPanelProperty, false);
+                double temp = ((Data_RP.ActualWidth / 2 - (xaml_MainGrid.Width - Data_RP.ActualWidth / 2)) - Sp_Pre.ActualWidth) / 2;
+                Sp_Pre.Margin = new Thickness(temp, 0, 0, 0);
+            }
+            else
+            {
+                xaml_MainGrid.SetValue(RelativePanel.AlignRightWithPanelProperty, false);
+                xaml_MainGrid.SetValue(RelativePanel.AlignHorizontalCenterWithPanelProperty, true);
+                xaml_MainGrid.Margin = new Thickness(xaml_MainGrid.Width  + 12, 12, 12, 0);
+
+                Sp_Pre.SetValue(RelativePanel.AlignLeftWithPanelProperty, false);
+                Sp_Pre.SetValue(RelativePanel.AlignHorizontalCenterWithPanelProperty, true);
+                Sp_Pre.Margin = new Thickness(0, 0, Sp_Pre.ActualWidth + 12, 0);
+            }
+
+
+
+            double a = Sp_Pre.ActualWidth;
+            double b = xaml_MainGrid.ActualWidth;
+            double c = Root_Grid.ActualWidth;
+        }
+
+        private void Data_RP_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            UpdateMainGrid(e.NewSize.Height - 24);
+        }
     }
 }

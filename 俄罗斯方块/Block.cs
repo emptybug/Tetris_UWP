@@ -106,8 +106,9 @@ namespace 俄罗斯方块
                 recArr[i] = new Rectangle();
                 int x = (int)p.X + XPos, y = (int)p.Y + YPos;
                 recArr[i].Fill = InfoXml.GetLinearGradientBrushFromSolidBrush(BlockColor);
-                recArr[i].Margin = new Thickness(2);
-                recArr[i].RadiusX = 4; recArr[i].RadiusY = 4;
+
+                recArr[i].Margin = new Thickness(1);
+                recArr[i].RadiusX = 1; recArr[i].RadiusY = 1;
 
 
                 recArr[i].SetValue(Grid.RowProperty, x);
