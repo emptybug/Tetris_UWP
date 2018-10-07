@@ -40,32 +40,23 @@
                        >
             <TextBlock   
                         x:Uid="Title"
-                        FontSize="48dp"  FontFamily="幼圆" FontWeight="Bold"
+                        FontSize="48dp"  FontFamily="Microsoft YaHei UI" FontWeight="Bold"
                         RelativePanel.AlignHorizontalCenterWithPanel="True"
                         RelativePanel.AlignVerticalCenterWithPanel="True"
+                        Foreground="White"
                         >
-                <TextBlock.Foreground>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFFF0202" Offset="1"/>
-                        <GradientStop Color="#FFE97501" Offset="0.867"/>
-                        <GradientStop Color="#FFD0C700" Offset="0.754"/>
-                        <GradientStop Color="#FF64B700" Offset="0.6"/>
-                        <GradientStop Color="#FF00915C" Offset="0.425"/>
-                        <GradientStop Color="#FF00146C" Offset="0.158"/>
-                        <GradientStop Color="#FF44297E"/>
-                        <GradientStop Color="#FF29B0BD" Offset="0.3"/>
-                    </LinearGradientBrush>
-                </TextBlock.Foreground>
             </TextBlock>
         </RelativePanel>
 
         <Button  Grid.Column="1" Grid.Row="2"
+                 Width="Auto" Height="auto" MaxWidth="600" HorizontalAlignment="Stretch"
+                 Background="#FF5D3F22"  
+                 FontFamily="Microsoft YaHei UI" Foreground="White" FontSize="32dp" FontWeight="Bold" 
+                 Opacity="1" 
+                 
                  Margin="0 0 0 24"
                  x:Uid="MainButton"
-                 Click="Select_Leval" Background="#FF5D3F22"  FontFamily="幼圆" 
-                 Foreground="Gainsboro" FontSize="32dp" FontWeight="Bold" 
-                 HorizontalAlignment="Stretch" Width="Auto" Height="auto"
-                 >
-        </Button>
+                 Click="Select_Leval"
+                 />
     </Grid>
 </Page>
